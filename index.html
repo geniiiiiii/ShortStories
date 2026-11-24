@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Short Stories Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: Lernapp shell (Globalisierung / Français L7): sidebar + sticky topbar + 820px page column, Dub-style cards */
+:root{
+  --bg:#fafafa; --surface:#ffffff; --surface-2:#f5f5f5; --surface-3:#ebebeb;
+  --border:#e5e5e5; --border-strong:#d4d4d4; --text:#0a0a0a; --text-2:#3f3f46; --text-3:#6b6b74;
+  --primary:#0a0a0a; --primary-hover:#2a2a2e; --on-primary:#ffffff;
+  --grid:rgba(0,0,0,.055); --hover:rgba(0,0,0,.045);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.05); --shadow:0 1px 2px rgba(0,0,0,.04),0 6px 24px -8px rgba(0,0,0,.10); --shadow-lg:0 2px 4px rgba(0,0,0,.04),0 24px 48px -16px rgba(0,0,0,.18);
+  --green:#15803d; --green-bg:#f0fdf4; --green-bd:#bbf7d0; --green-solid:#22c55e;
+  --red:#b91c1c; --red-bg:#fef2f2; --red-bd:#fecaca;
+  --blue:#1d4ed8; --blue-bg:#eff6ff; --blue-bd:#bfdbfe; --blue-solid:#3b82f6;
+  --amber:#a16207; --amber-bg:#fefce8; --amber-bd:#fde68a;
+  --purple:#6d28d9; --purple-bg:#f5f3ff; --purple-bd:#ddd6fe; --purple-solid:#8b5cf6;
+  --r-sm:8px; --r:12px; --r-lg:16px; --sb-w:288px; --top-h:64px;
+  --font:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0a0a0b; --surface:#141416; --surface-2:#1b1b1e; --surface-3:#26262a; --border:#27272a; --border-strong:#3f3f46;
+  --text:#fafafa; --text-2:#d4d4d8; --text-3:#a1a1aa; --primary:#fafafa; --primary-hover:#e4e4e7; --on-primary:#0a0a0a;
+  --grid:rgba(255,255,255,.06); --hover:rgba(255,255,255,.06);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 24px -8px rgba(0,0,0,.6); --shadow-lg:0 2px 4px rgba(0,0,0,.4),0 24px 48px -16px rgba(0,0,0,.8);
+  --green:#4ade80; --green-bg:rgba(34,197,94,.12); --green-bd:rgba(34,197,94,.35);
+  --red:#f87171; --red-bg:rgba(239,68,68,.12); --red-bd:rgba(239,68,68,.35);
+  --blue:#60a5fa; --blue-bg:rgba(59,130,246,.12); --blue-bd:rgba(59,130,246,.35);
+  --amber:#facc15; --amber-bg:rgba(234,179,8,.12); --amber-bd:rgba(234,179,8,.35);
+  --purple:#c4b5fd; --purple-bg:rgba(139,92,246,.14); --purple-bd:rgba(139,92,246,.4); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0a0a0b; --surface:#141416; --surface-2:#1b1b1e; --surface-3:#26262a; --border:#27272a; --border-strong:#3f3f46;
+  --text:#fafafa; --text-2:#d4d4d8; --text-3:#a1a1aa; --primary:#fafafa; --primary-hover:#e4e4e7; --on-primary:#0a0a0a;
+  --grid:rgba(255,255,255,.06); --hover:rgba(255,255,255,.06);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 24px -8px rgba(0,0,0,.6); --shadow-lg:0 2px 4px rgba(0,0,0,.4),0 24px 48px -16px rgba(0,0,0,.8);
+  --green:#4ade80; --green-bg:rgba(34,197,94,.12); --green-bd:rgba(34,197,94,.35);
+  --red:#f87171; --red-bg:rgba(239,68,68,.12); --red-bd:rgba(239,68,68,.35);
+  --blue:#60a5fa; --blue-bg:rgba(59,130,246,.12); --blue-bd:rgba(59,130,246,.35);
+  --amber:#facc15; --amber-bg:rgba(234,179,8,.12); --amber-bd:rgba(234,179,8,.35);
+  --purple:#c4b5fd; --purple-bg:rgba(139,92,246,.14); --purple-bd:rgba(139,92,246,.4); color-scheme:dark}
+
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-wrap:break-word;overflow-x:clip}
+a{color:inherit} button{font:inherit;color:inherit}
+h1,h2,h3{letter-spacing:-.02em;text-wrap:balance}
+.ic{width:20px;height:20px;flex:none;display:block}
+:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+
+/* Shell */
+.app{display:grid;grid-template-columns:var(--sb-w) minmax(0,1fr);min-height:100%}
+.sidebar{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--surface-2);border-right:1px solid var(--border)}
+.sb-inner{height:100%;overflow-y:auto;padding:20px 16px 28px;display:grid;align-content:start;gap:16px;scrollbar-width:thin}
+.logo{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;padding:4px 8px;text-decoration:none}
+.logo-mark{width:42px;height:42px;border-radius:11px;background:var(--primary);color:var(--on-primary);display:grid;place-items:center;font-weight:800;font-size:19px;letter-spacing:-.04em}
+.logo-txt{display:grid;line-height:1.25}.logo-t{font-weight:700;font-size:17px}.logo-s{font-size:14px;color:var(--text-3)}
+.nav{display:grid;gap:2px}
+.nav-h{font-size:13px;font-weight:600;color:var(--text-3);padding:12px 12px 6px}
+.nav a{display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:center;padding:8px 12px;border-radius:var(--r-sm);color:var(--text-2);text-decoration:none;font-size:15.5px;font-weight:500;border:1px solid transparent}
+.nav a:hover{background:var(--hover);color:var(--text)}
+.nav a.on{background:var(--surface);color:var(--text);border-color:var(--border);box-shadow:var(--shadow-sm)}
+.nav .ic{width:19px;height:19px}
+.main-col{min-width:0;display:grid;grid-template-rows:auto 1fr}
+.topbar{position:sticky;top:0;z-index:30;height:var(--top-h);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:0 28px 0 32px;background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.crumbs{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--text-3);min-width:0;white-space:nowrap;overflow:hidden}
+.crumbs a{text-decoration:none}.crumbs a:hover{color:var(--text)}
+.crumbs b{color:var(--text);font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.crumbs .ic{width:14px;height:14px}
+.icon-btn{width:40px;height:40px;border-radius:var(--r-sm);border:1px solid var(--border-strong);background:var(--surface);display:grid;place-items:center;color:var(--text-2);cursor:pointer;box-shadow:var(--shadow-sm)}
+.icon-btn:hover{background:var(--surface-2);color:var(--text)}
+.menu-btn{display:none!important}
+.backdrop{display:none}
+main{min-width:0}
+.page{max-width:860px;margin:0 auto;padding:40px 40px 100px}
+@media (prefers-reduced-motion:no-preference){main{animation:pageIn .3s ease both}@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+.ph{display:grid;gap:8px;margin-bottom:24px}
+.ph h1{font-size:34px;line-height:1.15;letter-spacing:-.03em;font-weight:700;margin:0}
+.ph p{margin:0;color:var(--text-2);font-size:17.5px}
+.sec-h{display:grid;gap:4px;margin:44px 0 16px}
+.sec-h h2{font-size:24px;margin:0;font-weight:700}
+.sec-h p{margin:0;color:var(--text-3)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.muted{color:var(--text-3)}
+p{margin:0 0 10px}p:last-child{margin-bottom:0}
+ul{margin:0;padding-left:20px}li{margin:3px 0}
+
+/* Buttons */
+.btn{display:inline-grid;grid-auto-flow:column;gap:8px;align-items:center;justify-content:center;height:46px;padding:0 20px;border-radius:var(--r-sm);font-size:16px;font-weight:500;border:1px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:active{transform:translateY(1px)}
+.btn .ic{width:18px;height:18px}
+.btn-p{background:var(--primary);color:var(--on-primary)}.btn-p:hover{background:var(--primary-hover)}
+.btn-s{background:var(--surface);color:var(--text);border-color:var(--border-strong);box-shadow:var(--shadow-sm)}.btn-s:hover{background:var(--surface-2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--border-strong);background:var(--surface);color:var(--text-2);font-size:15px;font-weight:500;cursor:pointer}
+.chip:hover{color:var(--text);background:var(--surface-2)}
+.chip.on{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+
+/* Cards and boxes */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow)}
+.card-b{padding:24px}
+.grid-top{position:relative;border-bottom:1px solid var(--border);background:var(--surface-2);overflow:hidden;display:grid;place-items:center}
+.grid-top::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;background-position:center;-webkit-mask-image:radial-gradient(ellipse 80% 90% at 50% 50%,#000 40%,transparent 100%);mask-image:radial-gradient(ellipse 80% 90% at 50% 50%,#000 40%,transparent 100%)}
+.badge-ic{position:relative;width:60px;height:60px;border-radius:50%;background:var(--primary);color:var(--on-primary);display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.badge-ic .ic{width:26px;height:26px}
+.tile{position:absolute;width:34px;height:34px;border-radius:9px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;color:var(--text-3);box-shadow:var(--shadow-sm)}
+.tile .ic{width:16px;height:16px}
+.box{position:relative;border:1px solid var(--blue-bd);background:var(--blue-bg);border-radius:10px;padding:14px 18px 14px 50px;margin:16px 0;font-size:16.5px}
+.box>.ic.bx{position:absolute;left:17px;top:16px;width:20px;height:20px;color:var(--blue)}
+.box.green{border-color:var(--green-bd);background:var(--green-bg)}.box.green>.ic.bx{color:var(--green)}
+.box.amber{border-color:var(--amber-bd);background:var(--amber-bg)}.box.amber>.ic.bx{color:var(--amber)}
+.box.purple{border-color:var(--purple-bd);background:var(--purple-bg)}.box.purple>.ic.bx{color:var(--purple)}
+.box-t{display:block;font-weight:600;margin-bottom:4px}
+.tbl-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px;background:var(--surface)}
+.tbl{width:100%;border-collapse:collapse;font-size:16px}
+.tbl th{background:var(--surface-2);text-align:left;font-weight:600;font-size:14px;color:var(--text-2);padding:10px 14px;border-bottom:1px solid var(--border);white-space:nowrap}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td:first-child{font-weight:600}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:16px 0}
+.field{border:1px solid var(--border);border-radius:10px;padding:14px 16px;background:var(--surface)}
+.field b{display:block;margin-bottom:4px}
+.field div{font-size:15.5px;color:var(--text-2);line-height:1.65}
+.field .ex{margin-top:6px;font-size:14.5px;color:var(--text-3)}
+details.try{border:1px dashed var(--border-strong);border-radius:10px;padding:0 16px;margin:10px 0;background:var(--surface)}
+details.try summary{cursor:pointer;padding:12px 0;font-weight:500;list-style:none;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+details.try summary::-webkit-details-marker{display:none}
+details.try summary::after{content:'Show answer';font-size:14px;color:var(--text-3);font-weight:500;border:1px solid var(--border);border-radius:6px;padding:2px 10px;white-space:nowrap}
+details.try[open] summary::after{content:'Hide'}
+details.try>div{padding:0 0 14px;color:var(--green);font-weight:500}
+
+/* Plot steps */
+.steps{display:grid;gap:0;margin:16px 0;border:1px solid var(--border);border-radius:10px;background:var(--surface);overflow:hidden}
+.step{display:grid;grid-template-columns:170px minmax(0,1fr);gap:14px;padding:12px 16px;position:relative}
+.step+.step{border-top:1px solid var(--border)}
+.step b{font-size:15px;display:flex;align-items:center;gap:10px}
+.step b::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--border-strong);flex:none}
+.step.top b::before{background:var(--primary)}
+.step span{color:var(--text-2);font-size:16px}
+.pyr{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px;background:var(--surface);padding:10px}
+.pyr svg{display:block;width:100%;min-width:520px;height:auto}
+.pyr text{fill:var(--text);font:600 13px var(--font)}.pyr .s{fill:var(--text-3);font-weight:500;font-size:11.5px}
+.pyr path{stroke:var(--text);fill:none;stroke-width:2}.pyr circle{fill:var(--surface);stroke:var(--text);stroke-width:2}
+blockquote{margin:0}
+
+/* Home */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--border);background:var(--surface);padding:72px 24px 64px}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:44px 44px;background-position:center top;-webkit-mask-image:radial-gradient(ellipse 70% 75% at 50% 45%,#000 25%,transparent 80%);mask-image:radial-gradient(ellipse 70% 75% at 50% 45%,#000 25%,transparent 80%)}
+.hero-glow{position:absolute;left:50%;top:48%;width:760px;max-width:100%;height:340px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,var(--surface) 62%,transparent)}
+.hero-c{position:relative;display:grid;justify-items:center;text-align:center;gap:12px;max-width:660px;margin:0 auto}
+.wordmark{font-size:clamp(52px,8.5vw,104px);font-weight:800;letter-spacing:-.06em;line-height:.95;margin:0 0 6px}
+.hero h2{font-size:24px;font-weight:600;margin:0}
+.hero p{color:var(--text-2);font-size:18px;margin:0;max-width:540px}
+.hero .row{justify-content:center;margin-top:10px}
+.hero .tile{z-index:0}
+@media (max-width:1100px){.hero .tile{display:none}}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--border);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow-sm);overflow:hidden}
+.stat{padding:18px 22px;display:grid;gap:2px}.stat+.stat{border-left:1px solid var(--border)}
+.stat b{font-size:30px;font-weight:700;letter-spacing:-.04em;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:15px;color:var(--text-3)}
+.modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.mode{display:grid;grid-template-rows:auto 1fr;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);text-decoration:none;color:inherit;transition:transform .22s ease,box-shadow .22s ease,border-color .22s}
+.mode:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--border-strong)}
+.mode .grid-top{height:120px}
+.mode-b{padding:18px 20px 20px;display:grid;gap:4px}
+.mode-b h3{margin:0;font-size:19px;font-weight:650}
+.mode-b p{margin:0;color:var(--text-3);font-size:15px}
+.quick{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.q-item{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:14px 16px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);text-decoration:none;font-weight:500;box-shadow:var(--shadow-sm);transition:border-color .15s,transform .15s}
+.q-item:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+.q-item>.ic:last-child{width:16px;height:16px;color:var(--text-3)}
+.q-ic{width:38px;height:38px;border-radius:9px;border:1px solid var(--border);background:var(--surface-2);display:grid;place-items:center}
+.q-ic .ic{width:19px;height:19px}
+
+/* Flashcards */
+.fc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);overflow:hidden;cursor:pointer}
+.fc .grid-top{height:96px}
+.fc-b{padding:26px 30px 30px;text-align:center;min-height:180px;display:grid;align-content:center;gap:10px}
+.fc-l{font-size:14px;color:var(--text-3);font-weight:500}
+.fc-q{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.25}
+.fc-a{font-size:17px;color:var(--text-2);border-top:1px dashed var(--border);padding-top:12px}
+.fc.hide .fc-a{display:none}
+.fc-n{font-size:15px;color:var(--text-3);font-variant-numeric:tabular-nums}
+
+/* Mobile */
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .sidebar{position:fixed;left:0;top:0;z-index:60;width:min(320px,88vw);transform:translateX(-102%);transition:transform .25s ease;box-shadow:var(--shadow-lg)}
+  .sb-open .sidebar{transform:none}
+  .sb-inner{padding-top:calc(20px + env(safe-area-inset-top,0px))}
+  .backdrop{display:block;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:55;opacity:0;pointer-events:none;transition:opacity .2s}
+  .sb-open .backdrop{opacity:1;pointer-events:auto}
+  .menu-btn{display:grid!important}
+  .topbar{top:env(safe-area-inset-top,0px);padding:0 16px;gap:10px;grid-template-columns:auto minmax(0,1fr) auto}
+  .page{padding:28px 16px 90px}
+  .ph h1{font-size:28px}
+  .hero{padding:52px 16px 46px}
+  .hero .tile{display:none}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--border)}
+  .step{grid-template-columns:minmax(0,1fr);gap:2px}
+  .fc-b{padding:22px 18px 24px}
+  .fc-q{font-size:21px}
+}
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+  <aside class="sidebar" aria-label="Navigation"><div class="sb-inner">
+    <a class="logo" href="#home"><span class="logo-mark">S</span><span class="logo-txt"><span class="logo-t">Short Stories</span><span class="logo-s">Geng F3A · Literature</span></span></a>
+    <nav class="nav" id="nav"></nav>
+  </div></aside>
+  <div class="backdrop" id="backdrop"></div>
+  <div class="main-col">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu"></button>
+      <nav class="crumbs" id="crumbs" aria-label="Path"></nav>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch light or dark"></button>
+    </header>
+    <main id="main"></main>
+  </div>
+</div>
+
+<script>
+'use strict';
+const IC={
+ home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/>',
+ book:'<path d="M2 5.5c2-1 5-1.2 10 .5 5-1.7 8-1.5 10-.5V19c-2-1-5-1.2-10 .5-5-1.7-8-1.5-10-.5z"/><path d="M12 6v13.5"/>',
+ pen:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+ cards:'<rect x="3" y="7" width="13" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/>',
+ message:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/>',
+ sparkle:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m6 6 2 2M16 16l2 2M6 18l2-2M16 8l2-2"/>',
+ utensils:'<path d="M7 2v20"/><path d="M4 2v5a3 3 0 0 0 6 0V2"/><path d="M18 2c-2 1.5-3 4-3 7h3v13"/>',
+ timer:'<circle cx="12" cy="13.5" r="7.5"/><path d="M12 10v3.5l2.5 1.5"/><path d="M9.5 2.5h5"/><path d="m18.5 6 1.5-1.5"/>',
+ flag:'<path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/>',
+ key:'<circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 9.2-9.2M17 6l3 3M14.5 8.5l2 2"/>',
+ eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+ layers:'<path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 12.5 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+ quote:'<path d="M7 7h4v4c0 3-1.5 5-4 6"/><path d="M15 7h4v4c0 3-1.5 5-4 6"/>',
+ bulb:'<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
+ info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
+ alert:'<path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>',
+ target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+ moon:'<path d="M20.5 13.5A8.5 8.5 0 1 1 10.5 3.5a6.5 6.5 0 0 0 10 10z"/>',
+ menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+ chevR:'<path d="m9 18 6-6-6-6"/>',
+ arrowL:'<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>',
+ arrowR:'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+ shuffle:'<path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="m4 4 5 5"/>'
+};
+const icon=(n,c='')=>`<svg class="ic ${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]||''}</svg>`;
+const box=(kind,ic,title,body)=>`<div class="box ${kind}">${icon(ic,'bx')}${title?`<span class="box-t">${title}</span>`:''}${body}</div>`;
+const field=(t,d,ex)=>`<div class="field"><b>${t}</b><div>${d}${ex?`<div class="ex">${ex}</div>`:''}</div></div>`;
+const sec=(t,p)=>`<div class="sec-h"><h2>${t}</h2>${p?`<p>${p}</p>`:''}</div>`;
+const gtop=(ic,h,tiles=[])=>`<div class="grid-top" style="height:${h}px">${tiles.map(t=>`<span class="tile" style="${t[1]}">${icon(t[0])}</span>`).join('')}<span class="badge-ic">${icon(ic)}</span></div>`;
+
+/* ---------- THEORY ---------- */
+const theory=()=>`
+<div class="ph"><h1>Literary Theory</h1><p>The essentials from your theory pages.</p></div>
+${box('','info','','<p>Always back up a claim with a short quote and the line number.</p>')}
+
+${sec('Short story features')}
+<div class="card card-b"><ul>
+ <li>Short prose, simple language; one setting, few characters.</li>
+ <li>Everyday people, no heroes.</li>
+ <li>One decisive moment, a snapshot of life.</li>
+ <li>Often an abrupt start and an open or twist ending.</li>
+ <li>Imagery and symbols; born in 19th century US newspapers.</li>
+</ul></div>
+
+${sec("Freytag's Pyramid")}
+<div class="pyr"><svg viewBox="0 0 720 230" role="img" aria-label="Freytag's pyramid">
+ <path d="M20 190 L150 190 L190 175 L360 40 L530 175 L570 190 L700 190"/>
+ <circle cx="150" cy="190" r="5"/><circle cx="190" cy="175" r="5"/><circle cx="360" cy="40" r="6"/><circle cx="530" cy="175" r="5"/><circle cx="570" cy="190" r="5"/>
+ <text x="40" y="212">Exposition</text><text x="140" y="160" text-anchor="end">Inciting incident</text>
+ <text x="235" y="100" text-anchor="end">Rising action</text><text x="360" y="26" text-anchor="middle">Climax</text>
+ <text x="485" y="100">Falling action</text><text x="545" y="160">Resolution</text><text x="600" y="212">Denouement</text>
+ <text x="360" y="60" text-anchor="middle" class="s">turning point, most intense moment</text></svg></div>
+<div class="steps">${[['Exposition','Setting, characters, background.'],['Inciting incident','Starts the main conflict.'],['Rising action','Obstacles build tension.'],['Climax','Turning point, most intense moment.'],['Falling action','Consequences.'],['Resolution','Conflict wrapped up.'],['Denouement','The new reality afterwards.'],['Foreshadowing','Hints about what comes later.']].map(s=>`<div class="step${s[0]==='Climax'?' top':''}"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
+
+${sec('Narrator')}
+<div class="fields">
+ ${field('First person','"I" inside the story; limited view.')}
+ ${field('Third person limited','Inside one character\'s head.')}
+ ${field('Third person omniscient','Knows everything about everyone.')}
+ ${field('Third person objective','Only what is seen and heard.')}
+ ${field('Unreliable','Biased or distorted; we doubt the story.')}
+</div>
+
+${sec('Characterisation')}
+<div class="fields">
+ ${field('Direct','Qualities are stated outright.')}
+ ${field('Indirect','Shown through thoughts, actions, speech, looks and how others react.')}
+ ${field('Internal / external traits','Personality (wise, selfish) vs looks (tall, dirty face).')}
+</div>
+
+${sec('Irony, theme, symbol')}
+<div class="fields">
+ ${field('Situational irony','The opposite of what we expect happens.')}
+ ${field('Dramatic irony','We know something the characters do not.')}
+ ${field('Theme','The central message, shown rather than stated.')}
+ ${field('Symbol','An object that stands for a bigger idea.')}
+ ${field('Atmosphere','The feeling a setting creates: calm, tense, gloomy, mysterious.')}
+ ${field('Iceberg Theory','Hemingway: show 1/8, the reader infers the hidden 7/8.')}
+</div>`;
+const theoryOld=()=>`
+<div class="ph"><h1>Literary Theory</h1><p>Everything from your Literary Theory and Setting and Atmosphere pages.</p></div>
+${box('','info','Exam rule from class','<p>Always support a claim with evidence from the text: a short quote and the line number.</p>')}
+
+${sec('What makes a short story')}
+<div class="card card-b"><ul>
+ <li>Prose in simple language; shorter and less complex than a novel.</li>
+ <li>One setting, few characters, few events.</li>
+ <li>Everyday people, no heroes.</li>
+ <li>Often an open plot: abrupt opening and abrupt or open ending.</li>
+ <li>Focus on one decisive moment that shows a character's strengths and weaknesses: a snapshot of life.</li>
+ <li>Imagery and symbols create one effect in the reader's mind.</li>
+ <li>Emerged in the USA in the 19th century because newspapers needed shorter texts.</li>
+</ul></div>
+
+${sec("Freytag's Pyramid",'The stages of plot development.')}
+<div class="pyr"><svg viewBox="0 0 720 230" role="img" aria-label="Freytag's pyramid">
+ <path d="M20 190 L150 190 L190 175 L360 40 L530 175 L570 190 L700 190"/>
+ <circle cx="150" cy="190" r="5"/><circle cx="190" cy="175" r="5"/><circle cx="360" cy="40" r="6"/><circle cx="530" cy="175" r="5"/><circle cx="570" cy="190" r="5"/>
+ <text x="40" y="212">Exposition</text><text x="140" y="160" text-anchor="end">Inciting incident</text>
+ <text x="235" y="100" text-anchor="end">Rising action</text><text x="360" y="26" text-anchor="middle">Climax</text>
+ <text x="485" y="100">Falling action</text><text x="545" y="160">Resolution</text><text x="600" y="212">Denouement</text>
+ <text x="360" y="60" text-anchor="middle" class="s">turning point, most intense moment</text></svg></div>
+<div class="fields">
+ ${field('Exposition','Setting, characters and background are introduced.')}
+ ${field('Inciting incident','The moment that sets the main conflict in motion.')}
+ ${field('Rising action','Conflicts and obstacles that build tension.')}
+ ${field('Climax','The turning point and most intense moment.')}
+ ${field('Falling action','Events that show the consequences and lead to the resolution.')}
+ ${field('Resolution','The main conflict is wrapped up.')}
+ ${field('Denouement','The aftermath: the characters\' new reality or a hint at the future.')}
+ ${field('Foreshadowing','Hints about later events in dialogue, descriptions or symbols. Builds suspense.')}
+</div>
+
+${sec('The narrator')}
+<div class="fields">
+ ${field('First person','A character tells the story with "I" or "we". Personal, limited view.','A Day\'s Wait, The Tell-Tale Heart, Six Feet of the Country')}
+ ${field('Third person limited','Shows the thoughts and feelings of only one character.','The Necklace, The Landlady')}
+ ${field('Third person omniscient','Knows everything about all characters. Not part of the story.')}
+ ${field('Third person objective','Only what can be seen and heard, no thoughts. Also called neutral.','Thank You, Ma\'am comes close')}
+ ${field('Unreliable narrator','Biased, deceptive or distorted, so we question the story. Any type except the objective one can be biased.','The Tell-Tale Heart, Six Feet of the Country')}
+</div>
+
+${sec('Characterisation')}
+<div class="fields">
+ ${field('Direct (explicit)','The author, narrator, another character or the character directly states the qualities.','"Sam\'s the worst." directly calls Sam selfish and cruel.')}
+ ${field('Indirect (implicit)','We infer qualities from thoughts, actions, words, way of talking, appearance, mannerisms and how others react.')}
+ ${field('Internal traits','Personality: intelligent, wise, determined, selfish, caring.')}
+ ${field('External traits','Physical: tall, athletic, brown eyes, dirty face.')}
+</div>
+${box('','bulb','Useful extra words','<p><b>Protagonist</b> and <b>antagonist</b>; <b>flat</b> (one trait) vs <b>round</b> (complex); <b>static</b> (no change) vs <b>dynamic</b> (changes). Mathilde and Roger are dynamic, Madame Forestier is flat.</p>')}
+
+${sec('Irony')}
+<div class="fields">
+ ${field('Situational irony','What happens is the opposite of what we expected. Surprising but logical in hindsight; funny or tragic.','The Necklace: ten years of work for a fake necklace.')}
+ ${field('Dramatic irony','The reader knows something the characters do not. Creates tension or humour.','The Landlady; the police search in The Tell-Tale Heart.')}
+ ${field('Verbal irony','Saying the opposite of what you mean.','Six Feet: a pauper\'s grave made to "sound like a privilege".')}
+</div>
+
+${sec('Theme, symbol, setting')}
+<div class="fields">
+ ${field('Theme','The central message beyond the events (love, justice, identity). Rarely stated; shown through characters, conflicts and outcomes.')}
+ ${field('Symbol','Something that stands for more than its literal meaning: journey = growth, storm = conflict, window = moving into another sphere. Often cultural (white = purity, or mourning in parts of Asia).')}
+ ${field('Setting','Place, time, season and historical background. Ask why it matters and how it changes.')}
+ ${field('Atmosphere','The feeling the setting creates. Positive: calm, warm. Negative: gloomy, tense. Mysterious: strange, unsettling. Neutral: quiet, ordinary.')}
+ ${field('Imagery','Language that appeals to the senses to create a vivid picture.')}
+ ${field('Iceberg Theory','Hemingway\'s "theory of omission": 1/8 visible (facts, dialogue), 7/8 hidden (emotion, subtext, theme).')}
+</div>
+${box('green','pen','Sentence starters','<ul><li>The story is set in … / takes place in …, during …</li><li>At first, the setting seems …, but later it becomes …</li><li>Words such as "…" and "…" make the place seem …</li><li>As the story continues, the mood changes from … to …</li><li>This creates tension / a sense of danger / a feeling of calm.</li></ul>')}`;
+
+/* ---------- DEVICES ---------- */
+const devices=[
+ ["Alliteration","Same consonant sound at the start of nearby words.","\"From forth the fatal loins of these two foes\""],
+ ["Anaphora","Same words at the start of successive clauses.","\"I have a dream … I have a dream …\""],
+ ["Antithesis","Opposite ideas side by side.","\"the best of times, … the worst of times\"; A Day's Wait: ice outside, fever inside"],
+ ["Epistrophe","Same words at the end of successive clauses.","\"of the people, by the people, for the people\""],
+ ["Hyperbole","Extreme exaggeration.","\"I heard many things in hell\" (Tell-Tale Heart, l. 5)"],
+ ["Metaphor","Comparison without like or as.","\"He had the eye of a vulture\" (Tell-Tale Heart, l. 9)"],
+ ["Onomatopoeia","Words that copy sounds.","meow, sizzle"],
+ ["Parallelism","Same sentence structure repeated.","\"with what caution, with what foresight\" (Tell-Tale Heart, l. 13)"],
+ ["Personification","Human qualities for non-human things.","\"Death … had stalked with his black shadow\" (Tell-Tale Heart, l. 55)"],
+ ["Rule of three","Three elements for emphasis.","\"Friends, Romans, countrymen\""],
+ ["Simile","Comparison with like or as.","\"the wind was like a flat blade of ice\" (Landlady, l. 4)"],
+ ["Repetition","Repeating words for tension or feeling.","\"louder, louder\" (Tell-Tale Heart); \"bed and breakfast\" (Landlady, l. 49)"]
+];
+const devicesPage=()=>`<div class="ph"><h1>Stylistic Devices</h1><p>Name the device, quote it, then explain its function.</p></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Device</th><th>What it is</th><th>Example</th></tr></thead><tbody>
+${devices.map(d=>`<tr><td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td></tr>`).join('')}</tbody></table></div>
+${box('green','check','Model answer from class','<p>"Above all was the sense of hearing acute. I heard all things in the heaven and in the earth. I heard many things in hell." (ll. 4f.) Device: hyperbole. Function: it underlines the madness and unreliability of the narrator.</p>')}`;
+IC.check='<path d="M20 6 9 17l-5-5"/>';
+
+/* ---------- STORIES ---------- */
+const stories=[
+{id:'necklace',ic:'sparkle',title:'The Necklace',author:'Guy de Maupassant',year:'1884',
+ where:'Paris, late 19th century: the Loisels\' poor flat, the Ministry ball, later an attic flat.',
+ summary:'Mathilde is pretty but married to a poor clerk, and she dreams of luxury. Her husband gets an invitation to a Ministry ball and gives her his 400 francs of savings for a dress. She borrows a diamond necklace from her rich friend Madame Forestier and is the star of the ball. At home the necklace is gone. They buy a replacement for 36,000 francs with ruinous loans and spend ten years in hard poverty paying it off. Then Mathilde meets Madame Forestier and learns the original was fake, worth at most 500 francs.',
+ plot:[['Exposition','Mathilde\'s poor life, her dreams of luxury, the invitation.'],['Inciting incident','Borrowing the jewellery.'],['Rising action','The dress, the ball, her triumph.'],['Climax','Losing the necklace / returning the replacement.'],['Falling action','Ten years of hard work to pay the debt.'],['Resolution','Meeting Madame Forestier: the necklace was cheap (twist).']],
+ narrator:'Third person, focused on Mathilde (more limited than omniscient), but with general comments on society and women.',
+ setting:'Dream vs reality: silk rooms and fine dinners in her head, dirty walls and an old tablecloth at home. The ball is bright and joyful; afterwards the night is cold and shabby. Later: a garret and greasy pots. Mood: longing, triumph, despair, grim work.',
+ chars:[['Mathilde (dynamic)','Before: pretty, vain, materialistic, ungrateful, dreamy. After: "strong, hard and rough", red hands, old-looking, but honest and brave. She still dreams of the ball.'],['Monsieur Loisel','Kind, modest, content with little ("Ah! Beef stew!"), self-sacrificing: gives up his gun and his inheritance.'],['Madame Forestier','Rich and generous at first, cold when the necklace comes back late. A flat character for the twist.']],
+ themes:['Appearance vs reality','Vanity and materialism','Pride and its price','Social class','Fate'],
+ symbols:[['The necklace','Her dream of wealth, then her success, then her downfall; at the end the emptiness of appearances.'],['The mirror','Her vanity.'],['Ball dress vs modest wrap','Who she wants to be vs who she is.']],
+ irony:'Situational irony: ten years of sacrifice for a necklace worth almost nothing. One honest sentence would have saved them.',
+ quotes:[['She had no dresses, no jewels, nothing; and these were the only things she loved.','l. 26'],['How little is needed for one to be ruined or saved!','l. 192'],['Mine was an imitation!','l. 220']],
+ qs:[['Which short story features fit?','Three characters; one incident (the loss); ordinary people; twist ending; foreshadowing. Does not fit: the long time span of ten years.'],['Dramatic or situational irony at the end?','Situational: the outcome is the opposite of what Mathilde and the reader expected.'],['How does Mathilde change?','Appearance: pretty to rough. Attitude: vain to hard-working. Lifestyle: maid to garret. Emotions: envy to despair, then pride.']]},
+
+{id:'thankyou',ic:'utensils',title:'Thank You, Ma\'am',author:'Langston Hughes',year:'1958',
+ where:'A city street at 11 pm, then Mrs Jones\'s room in a rooming house (USA, 1950s).',
+ summary:'Roger, a boy of about 14, tries to snatch a large woman\'s purse at night but falls. Mrs Luella Bates Washington Jones holds him and drags him home. She makes him wash his face; he admits nobody is at home and he wanted blue suede shoes. She does not call the police. She leaves her purse where he could take it, but he does not. She cooks for him, gives him ten dollars for the shoes and tells him to behave. He can barely say "Thank you, ma\'am" and never sees her again.',
+ plot:[['Exposition','Night, a large woman with a large purse.'],['Inciting incident','Roger tries to snatch the purse and falls.'],['Rising action','She drags him home; the open door and the purse tempt him.'],['Climax','He chooses to stay and sits where she can see him: trust begins.'],['Falling action','They eat; she gives him ten dollars.'],['Resolution','He can only say "Thank you" and never sees her again.']],
+ narrator:'Third person, mostly objective: actions and dialogue, with only small glimpses into Roger\'s mind.',
+ setting:'A dark, lonely street feels tense; her simple room with open doors and other roomers feels safe and warm. Mood: from scary to calm and trusting.',
+ chars:[['Roger','Young, frail, "willow-wild", dirty face. Poor, lonely, insecure, but polite and willing to change. Dynamic.'],['Mrs Jones','Large, strong, middle-aged. Tough and fearless, but caring, forgiving and generous; she never shames him.'],['Similar and different','Both lonely; she also "wanted things I could not get", so she understands him. Her kindness changes him.']],
+ themes:['Kindness and forgiveness','Trust and seeing the good in people','Second chances'],
+ symbols:[['The purse','Temptation and desperation; her power over him (ll. 12ff.); later trust.'],['Washing his face','A fresh start.'],['Ten dollars','A second chance.'],['Blue suede shoes','His wish for a better life.']],
+ irony:'Situational irony: the thief expects jail, but the victim feeds him and gives him money.',
+ quotes:[['You ought to be my son. I would teach you right from wrong.','Mrs Jones'],['I were young once and I wanted things I could not get.','Mrs Jones'],['He did not trust the woman not to trust him.','narrator']],
+ qs:[['What is the purse a symbol of?','Temptation and desperation; her power at first; then trust.'],['How does characterisation support the theme?','Her kindness and her own past make her give a second chance, and this changes Roger.']]},
+
+{id:'daywait',ic:'timer',title:'A Day\'s Wait',author:'Ernest Hemingway',year:'1933',
+ where:'A family house in the country in winter, from morning to evening.',
+ summary:'A nine-year-old boy, Schatz, has the flu. The doctor measures 102 degrees (Fahrenheit). The boy stares at the foot of his bed and says his father can leave "if it bothers you". The father goes quail hunting on the ice. When he returns, the boy keeps everyone out so they do not catch it. Finally he asks when he will die: boys in France told him nobody lives with 44 degrees. The father explains the two thermometers. The boy relaxes, and the next day cries easily at little things.',
+ plot:[['Exposition','The boy looks sick: pale, shivering, headache, cold winter day.'],['Inciting incident','The doctor measures 102 degrees and leaves medicine.'],['Rising action','The boy acts strangely and will not sleep; the father goes hunting.'],['Climax','The second temperature; the boy asks if he is going to die.'],['Falling action','The father explains Fahrenheit and Celsius.'],['Resolution','The boy relaxes and sleeps.']],
+ narrator:'First person: the father. He cannot see into his son\'s head, so we only understand the boy at the end.',
+ setting:'Antithesis: a feverish, hot inside vs an icy outside "varnished with ice". Cosy, then strange, then tense; at the end relief and peace.',
+ chars:[['Schatz','Nine; "Schatz" is an affectionate nickname. Brave and controlled, faces death alone, protects others. Still a child: cries easily afterwards.'],['The father','Caring and patient, but does not see the real fear and goes hunting.']],
+ themes:['Miscommunication','Courage and self-control','Isolation and silence','Childhood vs adulthood'],
+ symbols:[['Thermometers','Two systems that do not match: the gap between father and son.'],['Ice outside, fever inside','Antithesis: inner struggle vs calm world.'],['The quail hunt','Life and death outside while the boy waits for death inside.']],
+ irony:'Reversed dramatic irony: the boy thinks he knows something the father does not. Then a twist: there was never any danger.',
+ quotes:[['You don\'t have to stay here with me, Papa, if it bothers you.','the boy'],['About what time do you think I\'m going to die?','the boy'],['He had been waiting to die all day','narrator']],
+ qs:[['Which short story features fit?','Three characters; one day; simple words; short; normal people; starts in the middle of things.'],['Iceberg Theory: what is hidden?','On the surface he lies still and asks his father to leave. Below: he is terrified, faces his fear alone and wants to spare his father.'],['Language and style?','Simple, matter-of-fact sentences, everyday words, short dialogue, German words.']]},
+
+{id:'sixfeet',ic:'flag',title:'Six Feet of the Country',author:'Nadine Gordimer',year:'1953',
+ where:'A farm ten miles from Johannesburg, South Africa, early 1950s, under apartheid.',
+ summary:'A white businessman and his wife Lerice own a weekend farm. One night a worker\'s brother, who walked illegally from Rhodesia to find work, dies in Petrus\'s hut. The authorities take the body and bury it in a pauper\'s grave. Petrus wants it back. Exhumation costs twenty pounds, and the narrator thinks that settles it, but the poor workers collect the money. At the funeral the old father says the coffin is too heavy: inside is a stranger. The real body is never found and the money is not returned. The father goes home in an old suit of Lerice\'s father.',
+ plot:[['Exposition','The couple, the farm, the "almost feudal" relationship with the workers.'],['Inciting incident','Albert wakes them: a young man is dying in Petrus\'s hut.'],['Rising action','Post-mortem, pauper\'s grave, twenty pounds, the workers pay.'],['Climax','At the funeral the coffin holds a stranger.'],['Falling action','The narrator argues; the body is never found.'],['Resolution','The father leaves in an old suit, "rather better off".']],
+ narrator:'First person: the white farm owner, an unreliable narrator. He does not see his own racism and coldness, so we have to read against him.',
+ setting:'The farm looks peaceful, far from the city\'s "tensions", but the calm is false. Apartheid laws on race, movement and work cause the whole tragedy.',
+ chars:[['The narrator','Materialistic, cold, paternalistic; sees the workers as inferior and accepts the system. Fights later as "a matter of principle".'],['Lerice','More emotional; pushes him to act, but also does not treat the workers as equals.'],['Petrus','Dignified, polite, loves his brother; asks for the money back only "in a voice of shame".']],
+ themes:['Racism and injustice under apartheid','Power and who is listened to','Dignity in death','Money vs human values'],
+ symbols:[['The coffin','Discrimination and suffering of black people: illegal migration, no medical care, death, anonymity.'],['"Six feet of the country"','A grave: the only piece of the country a black man gets, and even that is taken.'],['The old suit','A cheap gesture that cannot replace a son.']],
+ irony:'Situational irony at the funeral; verbal irony in "a pauper\'s grave … like a privilege"; the father leaves "better off" after losing everything.',
+ quotes:[['Now I\'m the one who\'ll have to do all the dirty work, I suppose.','35/1f.'],['Ah, I thought, that settles it.','38/24f.'],['regard it as the final bankruptcy','40/12']],
+ qs:[['Why do Petrus and the narrator see "getting the body back" differently?','For the narrator it is a legal and money matter; for Petrus it is family, dignity and a proper burial.'],['What does the mix-up show?','The authorities do not see black people as individuals ("surely one will do"): a racist society.'],['Explain "the final bankruptcy".','For the rich, life is to be spent and death is just the end of the account. For the poor, a decent funeral matters; he cannot understand this.']]},
+
+{id:'landlady',ic:'key',title:'The Landlady',author:'Roald Dahl',year:'1959',
+ where:'Bath, England, about 9 pm on a freezing evening; a bed and breakfast.',
+ summary:'Seventeen-year-old Billy Weaver comes to Bath for a new job. A "bed and breakfast" sign seems to hold him, and a kind-looking woman opens the door at once. The room is very cheap. The guestbook shows only two names, Mulholland and Temple, both from years ago, and they sound familiar from the newspapers. Her tea tastes of bitter almonds. She says both boys are still upstairs, and Billy learns her parrot and dog are stuffed. When he asks about other guests, she says: "Only you." The open ending suggests he has been poisoned.',
+ plot:[['Exposition','Billy arrives in Bath on a cold night.'],['Inciting incident','The sign seems to compel him to ring.'],['Rising action','Cheap room, empty hall, two names, odd smell, bitter tea.'],['Climax','The boys "never left"; the pets are stuffed.'],['Falling action','She asks if he signed the book.'],['Resolution (open)','"Only you."']],
+ narrator:'Third person limited, focused on naive Billy. He misses the warning signs the reader sees: strong dramatic irony.',
+ setting:'A cold, neglected street vs a warm room with a fire, a piano and pets. The cosiness is a trap; stuffed animals and the empty hall make it creepy.',
+ chars:[['The landlady','Looks harmless: "round pink face and very gentle blue eyes" (l. 67f.). Shown indirectly as dangerous: opens "like a jack-in-the-box", forgets his name, keeps stuffed pets, praises Temple\'s skin (l. 222). Deceptive, eccentric, murderous.'],['Billy','Naive, polite, ambitious ("brisk"), trusting; ignores red flags because the room is cheap.']],
+ themes:['Appearance vs reality','Naivety and trust','Danger behind kindness'],
+ symbols:[['Stuffed animals','Death and preservation; they foreshadow the boys\' and Billy\'s fate.'],['The guestbook','A record of her victims.'],['Bitter almonds','Cyanide: poison.']],
+ irony:'Dramatic irony: we see the danger, Billy does not. Situational irony: the kind "mother" is a killer.',
+ quotes:[['Each word was like a large black eye staring at him through the glass','l. 50'],['But this person was like a jack-in-the-box.','ll. 57f.'],['No, my dear. Only you.','l. 255']],
+ qs:[['Why does Billy stay?','It is very cheap, it looks cosy, and the sign seems to pull him in.'],['Name red flags.','Door opens instantly; room "all ready"; no coats; two names; forgets his name; boys "never left"; stuffed pets; bitter almonds.'],['Which senses create the atmosphere?','Touch: "flat blade of ice" (l. 4). Sight: the sign like "a large black eye" (l. 50). Smell: "pickled walnuts? … a hospital?" (ll. 200f.). Taste: bitter almonds (l. 244).']]},
+
+{id:'telltale',ic:'eye',title:'The Tell-Tale Heart',author:'Edgar Allan Poe',year:'1843',
+ where:'An old house, mostly a dark bedroom at midnight (Gothic setting).',
+ summary:'The narrator insists he is not mad, only "nervous". He loves the old man he lives with but hates his pale "vulture eye". For seven nights at midnight he shines a lantern ray on the sleeping man, but the eye is closed. On the eighth night the old man wakes; the eye is open. Driven by the heartbeat he hears, the narrator kills him and hides the body under the floor. Police come at 4 am. Calm, he puts his chair right over the corpse. Then he hears the heartbeat growing louder and shrieks a confession.',
+ plot:[['Exposition','He defends his sanity and describes the vulture eye.'],['Inciting incident','He decides to kill the old man.'],['Rising action','Seven nights of spying; on the eighth the old man wakes.'],['Climax','He kills him and hides the body.'],['Falling action','The police arrive; he sits over the corpse.'],['Resolution','He hears the heartbeat growing louder.'],['Denouement','He confesses.']],
+ narrator:'A classic unreliable first-person narrator: contradicts himself ("nervous" vs "calmly"), insists he is sane with weak arguments, enjoys power, kills without remorse.',
+ setting:'Midnight, pitch-black room, closed shutters, a thin lantern ray: dark, closed and tense, like the narrator\'s mind.',
+ chars:[['The narrator','Obsessive, paranoid, proud of his cleverness, cruel; yet guilt breaks out.'],['The old man','Unnamed and harmless ("He had never wronged me"); we only see his eye.'],['The police','Calm and friendly; their calm makes him more paranoid.']],
+ themes:['Madness','Guilt and conscience','Obsession','Being watched and judged'],
+ symbols:[['The eye','Powerlessness and inferiority; being watched and judged; madness.'],['The heartbeat','Guilt: the "tell-tale" that gives him away.'],['The watch (ll. 68, 115)','Time running out; "enveloped" like the hidden corpse.']],
+ irony:'Dramatic irony: we know the body is under the floor while the police search (ll. 101ff.). Situational irony: his "perfect" crime is destroyed by himself.',
+ quotes:[['why will you say that I am mad?','l. 1'],['He had the eye of a vulture','l. 9'],['It is the beating of his hideous heart!','last line']],
+ qs:[['Order of events (class task)','7, 3, 4, 6, 1, 9, 8, 5, 10, 2'],['Name and explain the devices.','Metaphor "eye of a vulture" (l. 9): frightening, obsession. Parallelism (l. 13): careful planning. Repetition "very, very slowly" (l. 18): caution. Personification of Death (l. 55): drama. Simile drum (ll. 69f.): excitement. "louder, louder" (ll. 73ff.): panic.'],['Why is he unreliable?','He contradicts himself, argues weakly that he is sane, is driven by fear of an eye and kills without remorse.']]}
+];
+
+function storyPage(s){
+ const i=stories.indexOf(s),prev=stories[i-1],next=stories[i+1];
+ return `<div class="ph"><h1>${s.title}</h1><p>${s.author}, ${s.year}. ${s.where}</p></div>
+ ${sec('What happens')}<div class="card card-b"><p>${s.summary}</p></div>
+ ${sec('Plot development')}<div class="steps">${s.plot.map(p=>`<div class="step${p[0]==='Climax'?' top':''}"><b>${p[0]}</b><span>${p[1]}</span></div>`).join('')}</div>
+ ${sec('Narrator and setting')}<div class="fields">${field('Narrator',s.narrator)}${field('Setting and atmosphere',s.setting)}</div>
+ ${sec('Characterisation')}<div class="fields">${s.chars.map(c=>field(c[0],c[1])).join('')}</div>
+ ${sec('Themes, symbols, irony')}
+ <div class="fields">${s.symbols.map(y=>field(y[0],y[1])).join('')}</div>
+ ${box('','layers','Themes','<ul>'+s.themes.map(t=>`<li>${t}</li>`).join('')+'</ul>')}
+ ${box('amber','alert','Irony','<p>'+s.irony+'</p>')}
+ ${sec('Key quotes')}${s.quotes.map(q=>box('purple','quote','',`<p>"${q[0]}"</p><p class="muted" style="font-size:14.5px">${q[1]}</p>`)).join('')}
+ ${sec('Practice questions')}${s.qs.map(q=>`<details class="try"><summary>${q[0]}</summary><div>${q[1]}</div></details>`).join('')}
+ <div class="row" style="justify-content:space-between;margin-top:32px">
+  ${prev?`<a class="btn btn-s" href="#${prev.id}">${icon('arrowL')}${prev.title}</a>`:'<span></span>'}
+  ${next?`<a class="btn btn-p" href="#${next.id}">${next.title}${icon('arrowR')}</a>`:`<a class="btn btn-p" href="#exam">Exam talk${icon('arrowR')}</a>`}
+ </div>`;
+}
+
+/* ---------- EXAM ---------- */
+const examPage=()=>`<div class="ph"><h1>Exam Talk</h1><p>From the Landlady "Think" page: be ready to talk about any text for 10 minutes, in this order.</p></div>
+<div class="steps">${[['Context','Author, title, year, setting, historical background.'],['Content','Short summary in your own words and the ending.'],['Plot development','Exposition to resolution; foreshadowing.'],['Point of view','Type of narrator and how it shapes what we know.'],['Imagery and atmosphere','Senses, one vivid image with line number, how the mood changes.'],['Irony','Situational or dramatic, with a reason.'],['Characterisation','Direct and indirect; three adjectives with evidence.'],['Themes and symbols','The message; what objects stand for.']].map(s=>`<div class="step"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
+${sec('Compare the six stories')}
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Story</th><th>Narrator</th><th>Irony</th><th>Twist</th><th>Key symbol</th></tr></thead><tbody>
+<tr><td>The Necklace</td><td>3rd person limited</td><td>Situational</td><td>Necklace was fake</td><td>Necklace</td></tr>
+<tr><td>Thank You, Ma'am</td><td>3rd person, mostly objective</td><td>Situational</td><td>Victim gives the thief money</td><td>Purse</td></tr>
+<tr><td>A Day's Wait</td><td>1st person (father)</td><td>Dramatic, reversed</td><td>Celsius vs Fahrenheit</td><td>Thermometer</td></tr>
+<tr><td>Six Feet of the Country</td><td>1st person, unreliable</td><td>Situational, verbal</td><td>A stranger in the coffin</td><td>Coffin</td></tr>
+<tr><td>The Landlady</td><td>3rd person limited</td><td>Dramatic</td><td>Open: Billy is next</td><td>Stuffed animals</td></tr>
+<tr><td>The Tell-Tale Heart</td><td>1st person, unreliable</td><td>Dramatic, situational</td><td>He confesses</td><td>Eye, heartbeat</td></tr>
+</tbody></table></div>`;
+
+/* ---------- FLASHCARDS ---------- */
+const cards=[
+ ['Theory','Climax','The turning point and most intense moment.'],
+ ['Theory','Inciting incident','The moment that sets the main conflict in motion.'],
+ ['Theory','Exposition','Introduction of setting, characters and background.'],
+ ['Theory','Falling action','Events after the climax that show the consequences.'],
+ ['Theory','Denouement','The aftermath: the characters\' new reality.'],
+ ['Theory','Foreshadowing','Hints about later events; builds suspense.'],
+ ['Theory','Direct characterisation','Qualities are stated directly.'],
+ ['Theory','Indirect characterisation','Qualities shown through thoughts, actions, words, tone, appearance and reactions.'],
+ ['Theory','Situational irony','The opposite of what we expected happens.'],
+ ['Theory','Dramatic irony','The reader knows something the characters do not.'],
+ ['Theory','Unreliable narrator','A biased, deceptive or distorted narrator.'],
+ ['Theory','Objective narrator','Only what can be seen and heard; no thoughts.'],
+ ['Theory','Theme','The central message, usually not stated directly.'],
+ ['Theory','Symbol','Something that stands for more than its literal meaning.'],
+ ['Theory','Iceberg Theory','Show 1/8 on the surface; the reader infers the hidden 7/8.'],
+ ['Devices','Anaphora','Same words at the start of successive clauses.'],
+ ['Devices','Epistrophe','Same words at the end of successive clauses.'],
+ ['Devices','Antithesis','Opposite ideas side by side.'],
+ ['Devices','"He had the eye of a vulture"','Metaphor: frightening eye, shows his obsession.'],
+ ['Devices','"the wind was like a flat blade of ice"','Simile: a cold, hostile setting.'],
+ ['Stories','What did the new necklace cost?','36,000 francs; the original was worth at most 500.'],
+ ['Stories','Why does Roger snatch the purse?','He wants blue suede shoes.'],
+ ['Stories','What does Mrs Jones give Roger?','A meal, cocoa, cake and ten dollars.'],
+ ['Stories','Why does Schatz think he will die?','Boys said nobody lives with 44 degrees (Celsius); he has 102 (Fahrenheit).'],
+ ['Stories','Where did Petrus\'s brother come from?','Rhodesia, walking illegally to find work.'],
+ ['Stories','What is in the coffin?','A stranger with a scar.'],
+ ['Stories','Names in the guestbook?','Christopher Mulholland and Gregory W. Temple.'],
+ ['Stories','What does the tea taste of?','Bitter almonds (cyanide).'],
+ ['Stories','Why does Poe\'s narrator kill?','Because of the old man\'s "vulture eye".'],
+ ['Stories','What makes him confess?','The imagined heartbeat: his guilt.']
+];
+let fc={deck:'All',list:[],i:0};
+const flashPage=()=>`<div class="ph"><h1>Flashcards</h1><p>Tap the card to show the answer.</p></div>
+<div class="row" style="margin-bottom:18px"><div class="chips" id="decks">${['All','Theory','Devices','Stories'].map(d=>`<button class="chip${d===fc.deck?' on':''}" data-d="${d}" type="button">${d}</button>`).join('')}</div><span style="flex:1"></span><button class="btn btn-s" id="shuf" type="button">${icon('shuffle')}Shuffle</button></div>
+<div class="fc hide" id="fc" tabindex="0" role="button" aria-label="Flip card">${gtop('cards',96)}<div class="fc-b"><div class="fc-l" id="fl"></div><div class="fc-q" id="fq"></div><div class="fc-a" id="fa"></div></div></div>
+<div class="row" style="justify-content:space-between;margin-top:16px"><button class="btn btn-s" id="prev" type="button">${icon('arrowL')}Back</button><span class="fc-n" id="cnt"></span><button class="btn btn-p" id="next" type="button">Next${icon('arrowR')}</button></div>`;
+function initFlash(){
+ const $=id=>document.getElementById(id);
+ const build=()=>{fc.list=cards.filter(c=>fc.deck==='All'||c[0]===fc.deck);fc.i=0;show()};
+ const show=()=>{const c=fc.list[fc.i];$('fl').textContent=c[0];$('fq').textContent=c[1];$('fa').textContent=c[2];$('fc').classList.add('hide');$('cnt').textContent=(fc.i+1)+' / '+fc.list.length};
+ const flip=()=>$('fc').classList.toggle('hide');
+ $('fc').onclick=flip;$('fc').onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();flip()}};
+ $('next').onclick=()=>{fc.i=(fc.i+1)%fc.list.length;show()};
+ $('prev').onclick=()=>{fc.i=(fc.i-1+fc.list.length)%fc.list.length;show()};
+ $('shuf').onclick=()=>{const a=fc.list;for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}fc.i=0;show()};
+ document.querySelectorAll('#decks .chip').forEach(b=>b.onclick=()=>{fc.deck=b.dataset.d;document.querySelectorAll('#decks .chip').forEach(x=>x.classList.toggle('on',x===b));build()});
+ build();
+}
+
+/* ---------- HOME ---------- */
+const homePage=()=>`<section class="hero"><div class="hero-grid"></div><div class="hero-glow"></div>
+ <span class="tile" style="left:12%;top:28%">${icon('book')}</span><span class="tile" style="left:18%;top:66%">${icon('eye')}</span>
+ <span class="tile" style="right:13%;top:26%">${icon('key')}</span><span class="tile" style="right:19%;top:64%">${icon('timer')}</span>
+ <div class="hero-c"><div class="wordmark">Short Stories</div><h2>Geng F3A · Literature</h2>
+ <p>All six stories from the Content Library, the theory and the stylistic devices, ready for the test.</p>
+ <div class="row"><a class="btn btn-p" href="#theory">${icon('book')}Start with theory</a><a class="btn btn-s" href="#cards">${icon('cards')}Flashcards</a></div></div></section>
+<div class="page">
+ <div class="stats"><div class="stat"><b>6</b><span>Stories</span></div><div class="stat"><b>12</b><span>Devices</span></div><div class="stat"><b>${cards.length}</b><span>Flashcards</span></div><div class="stat"><b>7</b><span>Plot stages</span></div></div>
+ ${sec('The six stories','Each one in the same order: plot, narrator, setting, characters, symbols, irony, quotes.')}
+ <div class="modes">${stories.map((s,k)=>`<a class="mode" href="#${s.id}">${gtop(s.ic,120,[[stories[(k+1)%6].ic,'left:16%;top:22%'],[stories[(k+3)%6].ic,'right:16%;bottom:20%']])}<div class="mode-b"><h3>${s.title}</h3><p>${s.author}, ${s.year}</p></div></a>`).join('')}</div>
+ ${sec('Learn and practise')}
+ <div class="quick">${[['theory','book','Literary Theory'],['devices','pen','Stylistic Devices'],['exam','message','Exam Talk'],['cards','cards','Flashcards']].map(q=>`<a class="q-item" href="#${q[0]}"><span class="q-ic">${icon(q[1])}</span>${q[2]}${icon('chevR')}</a>`).join('')}</div>
+</div>`;
+
+/* ---------- ROUTING ---------- */
+const views=[{id:'home',label:'Home',ic:'home'},{id:'theory',label:'Literary Theory',ic:'book'},{id:'devices',label:'Stylistic Devices',ic:'pen'},
+ ...stories.map(s=>({id:s.id,label:s.title,ic:s.ic,story:1})),{id:'exam',label:'Exam Talk',ic:'message'},{id:'cards',label:'Flashcards',ic:'cards'}];
+const nav=document.getElementById('nav'),main=document.getElementById('main'),app=document.getElementById('app');
+const link=v=>`<a href="#${v.id}" data-id="${v.id}">${icon(v.ic)}${v.label}</a>`;
+nav.innerHTML=views.slice(0,3).map(link).join('')+'<div class="nav-h">Stories</div>'+views.filter(v=>v.story).map(link).join('')+'<div class="nav-h">Practise</div>'+views.slice(-2).map(link).join('');
+document.getElementById('menuBtn').innerHTML=icon('menu');
+document.getElementById('menuBtn').onclick=()=>app.classList.add('sb-open');
+document.getElementById('backdrop').onclick=()=>app.classList.remove('sb-open');
+const themeBtn=document.getElementById('themeBtn');
+const curTheme=()=>document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+const setThemeIcon=()=>themeBtn.innerHTML=icon(curTheme()==='dark'?'sun':'moon');
+try{const t=localStorage.getItem('ss.theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+setThemeIcon();
+themeBtn.onclick=()=>{const t=curTheme()==='dark'?'light':'dark';document.documentElement.dataset.theme=t;try{localStorage.setItem('ss.theme',t)}catch(e){}setThemeIcon()};
+function route(){
+ const id=(location.hash||'#home').slice(1);
+ const v=views.find(x=>x.id===id)||views[0];
+ nav.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.dataset.id===v.id));
+ document.getElementById('crumbs').innerHTML=v.id==='home'?'<b>Home</b>':`<a href="#home">Home</a>${icon('chevR')}${v.story?'<span>Stories</span>'+icon('chevR'):''}<b>${v.label}</b>`;
+ let html;
+ if(v.id==='home')html=homePage();
+ else{const inner=v.id==='theory'?theory():v.id==='devices'?devicesPage():v.id==='exam'?examPage():v.id==='cards'?flashPage():storyPage(stories.find(s=>s.id===v.id));html=`<div class="page">${inner}</div>`}
+ main.innerHTML=html;
+ if(v.id==='cards')initFlash();
+ app.classList.remove('sb-open');
+ window.scrollTo(0,0);
+}
+addEventListener('hashchange',route);route();
+</script>
+
+</body>
+</html>
